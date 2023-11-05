@@ -22,14 +22,14 @@ do
 	case $choice in
 	1)
 		read -p "Please enter 'movie id'(1~1682):" movie_id
-		awk -F "|" -v a=$movie_id '$1==a  {print $0}' ./u.item
+		awk -F "|" -v a=$movie_id '$1==a  {print $0}' u.item
 		;;
 	2)
 		read -p "Do you want to get the data of 'action' genre movies from 'u.item'? (y/n) :" a2
 
                 case "$a2" in
                          "y")
-		  	  	awk -F "|" '$7==1 {if (count < 10) {print $1, $2; count++}}' ./u.item
+		  	  	awk -F "|" '$7==1 {if (count < 10) {print $1, $2; count++}}' u.item
                           ;;
                          "n")
                          	echo "You choose 'n'."
@@ -41,14 +41,14 @@ do
                 ;;
 	3)
 		read -p "Please enter the 'movie id' (1~1682):" a3
-		awk -v a=$a3 'BEGIN { sum = 0 } $2==a { sum += $3; count++ } END { if (count > 0) printf "average rating of %d: %.5f\n", a,  sum / count }' ./u.data
+		awk -v a=$a3 'BEGIN { sum = 0 } $2==a { sum += $3; count++ } END { if (count > 0) printf "average rating of %d: %.5f\n", a,  sum / count }' u.data
 		;;
 	4)	
 		read -p "Do you want to delete the 'IMDb URL' from 'u.item'?(y\n) :" a4
 
                 case "$a4" in
                          "y")
-			 	sed 's/[^|]*|//5' ./u.item | head -n 10
+			 	sed 's/[^|]*|//5' u.item | head -n 10
                           ;;
                          "n")
                            	echo "You choose 'n'."
